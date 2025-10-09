@@ -1,6 +1,5 @@
 import express from 'express'
 import dotenv from 'dotenv';
-import connectToDB from './db/db.js';
 import authRouter from './routes/auth.js'
 import profileRouter from './routes/profile.js'
 import cloudinaryRouter from './routes/cloudinary.js'
@@ -12,6 +11,26 @@ import cors from 'cors'
 dotenv.config();
 
 const app = express()
+
+const isConnected = false;
+const connectToDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URL)
+    isConnected = true;
+    console.log('[INFO] Connected to DB.\n\n\n')
+  } catch (error) {
+    console.log(`[ERROR] Failed to connect to DB: ${error}`)
+  }
+}
+
+app.use(async (req, res, next) => {
+  if (!isConnected) {
+    connectToDB()
+  }
+  next()
+})
+
+
 app.use('/api/payment/confirm', express.raw({ type: 'application/json' }));
 
 
@@ -63,14 +82,6 @@ app.get('/', async (req, res) => {
 // })
 
 
-const isConnected = false;
 
-app.use(async (req, res, next) => {
-  if (!isConnected) {
-    await connectToDB()
-    isConnected = true;
-  }
-  next()
-})
 
 export default app

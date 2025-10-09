@@ -16,7 +16,7 @@ const INTERVIEW_COST = process.env.INTERVIEW_COST
 // Setup multer for file upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = 'uploads/';
+        const uploadDir = '/tmp/';
         if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
         cb(null, uploadDir);
     },
