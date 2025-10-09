@@ -68,7 +68,7 @@ router.post('/register', async (req, res) => {
         return res.status(200).json({ success: true, message: "User registered successfully.", otpValidMins })
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ success: false, message: "Internal server error." })
+        return res.status(500).json({ success: false, message: "Internal server error." ,error})
     }
 
 
@@ -228,7 +228,7 @@ router.post('/login', async (req, res) => {
         return res.status(200).json({ success: true, authorization: newToken });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ success: false, message: "Internal server error" });
+        return res.status(500).json({ success: false, message: "Internal server error",error });
     }
 });
 

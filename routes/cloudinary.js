@@ -15,7 +15,7 @@ router.post('/generate-signature', authMiddleware, (req, res) => {
     return res.status(200).json({ success: true, signature: data })
   } catch (error) {
     console.error('Signature generation error:', error);
-    return res.status(500).json({ success: false, message: "Error generating signature." })
+    return res.status(500).json({ success: false, message: "Error generating signature.",error })
   }
 });
 

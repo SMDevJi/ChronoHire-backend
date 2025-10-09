@@ -88,7 +88,7 @@ router.post('/create-checkout-session', authMiddleware, async (req, res) => {
         res.status(200).json({ success: true, checkout_url: session.url })
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ success: false, message: "Internal server error." })
+        return res.status(500).json({ success: false, message: "Internal server error.",error })
     }
 
 
@@ -177,7 +177,7 @@ router.get('/get-orders', authMiddleware, async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ success: false, message: "Internal server error" });
+        return res.status(500).json({ success: false, message: "Internal server error" ,error});
     }
 });
 

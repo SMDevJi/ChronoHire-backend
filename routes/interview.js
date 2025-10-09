@@ -97,7 +97,7 @@ router.post("/create", upload.single("resumeFile"), authMiddleware, async (req, 
                 console.error("Failed to delete resume file after error:", err);
             }
         }
-        res.status(500).json({ success: false, message: "Internal Server error" });
+        res.status(500).json({ success: false, message: "Internal Server error",error });
     }
 });
 
@@ -129,7 +129,7 @@ router.get("/get-user", authMiddleware, async (req, res) => {
 
     } catch (error) {
         console.error("Error fetching user interviews:", error);
-        res.status(500).json({ success: false, message: "Internal Server error lol." });
+        res.status(500).json({ success: false, message: "Internal Server error lol.",error });
     }
 });
 
@@ -221,7 +221,7 @@ router.post("/submit/:id", authMiddleware, async (req, res) => {
 
     } catch (error) {
         console.error("Error submitting interview:", error);
-        res.status(500).json({ success: false, message: "Internal Server error" });
+        res.status(500).json({ success: false, message: "Internal Server error" ,error});
     }
 });
 
@@ -309,7 +309,7 @@ router.post("/reattempt/:id", upload.single("resumeFile"), authMiddleware, async
                 console.error("Failed to delete resume file after error:", err);
             }
         }
-        res.status(500).json({ success: false, message: "Internal Server error" });
+        res.status(500).json({ success: false, message: "Internal Server error" ,error});
     }
 });
 
@@ -355,7 +355,7 @@ router.get("/:id", authMiddleware, async (req, res) => {
         });
     } catch (error) {
         console.error("Error fetching interview:", error);
-        res.status(500).json({ success: false, message: "Internal Server error" });
+        res.status(500).json({ success: false, message: "Internal Server error",error });
     }
 });
 
