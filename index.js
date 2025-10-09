@@ -6,6 +6,7 @@ import cloudinaryRouter from './routes/cloudinary.js'
 import interviewRouter from './routes/interview.js'
 import paymentRouter from './routes/payment.js'
 import rateLimit from 'express-rate-limit';
+import { mongoose } from "mongoose";
 
 import cors from 'cors'
 dotenv.config();
