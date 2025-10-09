@@ -13,7 +13,7 @@ dotenv.config();
 
 const app = express()
 
-const isConnected = false;
+let isConnected = false;
 const connectToDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URL)
