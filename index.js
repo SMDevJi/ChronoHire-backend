@@ -32,8 +32,8 @@ const limiter = rateLimit({
   legacyHeaders: false,  // Disable the `X-RateLimit-*` headers
 });
 
-app.use('/api/auth/register',limiter);
-app.use('/api/auth/resend-otp',limiter);
+app.use('/api/auth/register', limiter);
+app.use('/api/auth/resend-otp', limiter);
 
 
 
@@ -46,18 +46,31 @@ const corsOptions = {
 };
 app.use(cors(corsOptions))
 
-app.use('/api/auth',authRouter)
-app.use('/api/profile',profileRouter)
-app.use('/api/cloudinary',cloudinaryRouter)
-app.use('/api/interviews',interviewRouter)
-app.use('/api/payment',paymentRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/profile', profileRouter)
+app.use('/api/cloudinary', cloudinaryRouter)
+app.use('/api/interviews', interviewRouter)
+app.use('/api/payment', paymentRouter)
 
 
 app.get('/', async (req, res) => {
-    res.status(200).json({ status: 'running' })
+  res.status(200).json({ status: 'running' })
 })
 
-app.listen(process.env.API_PORT, () => {
-    connectToDB()
-    console.log(`Server listening on port: ${process.env.API_PORT}`)
+// app.listen(process.env.API_PORT, () => {
+//     connectToDB()
+//     console.log(`Server listening on port: ${process.env.API_PORT}`)
+// })
+
+
+const isConnected = false;
+
+app.use(async (req, res, next) => {
+  if (!isConnected) {
+    await connectToDB()
+    isConnected = true;
+  }
+  next()
 })
+
+export default app
