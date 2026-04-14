@@ -50,7 +50,7 @@ export async function generateAIQA(role, description, resumeText, difficulty, ye
     `;
 
         const result = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
+            model: process.env.GEMINI_MODEL,
             contents: prompt,
         });
         const text = result.text;
@@ -160,7 +160,7 @@ candidate answer: ${q.transcript}
 
 
         const result = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
+            model: process.env.GEMINI_MODEL,
             contents: prompt,
         });
         const responseText = result.text;
